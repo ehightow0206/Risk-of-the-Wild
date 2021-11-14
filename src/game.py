@@ -36,8 +36,23 @@ def game_menu():
     menu.mainloop(gameDisplay)
     
 def game_loop():
-    print('this is a great game')
-    pygame.mixer.music.stop()
-    pygame.mixer.quit()
+    running = True
+    img = pygame.image.load('../map.jpg')
+    img.convert()
+    rect = img.get_rect()
+    rect.center = display_width//2, display_height//2
+    while running:
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    running = False
+            elif event.type == QUIT:
+                running = False
+        gameDisplay.fill((0,0,0))
+        gameDisplay.blit(img, rect)
+        pygame.draw.rect(gameDisplay, (45,0,0), rect, 1)
+        pygame.display.update()
+    # pygame.mixer.music.stop()
+    # pygame.mixer.quit()
 
 game_menu()
