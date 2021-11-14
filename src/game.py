@@ -5,11 +5,14 @@ from pygame.locals import *
 display_width = 900
 display_height = 600
 
+pygame.mixer.init()
 pygame.init()
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 
 def game_menu():
+    pygame.mixer.music.load("../Opening.mp3")
+    pygame.mixer.music.play()
     botw_image = pygame_menu.baseimage.BaseImage(
         image_path="../background.jpg",
         drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL,
