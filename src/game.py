@@ -1,12 +1,19 @@
 import pygame
 import pygame_menu
+import pygame_gui
 from pygame.locals import *
+from menu import Menu
  
-display_width = 900
+display_width = 800
 display_height = 600
 
 pygame.mixer.init()
 pygame.init()
+manager = pygame_gui.UIManager((display_width, display_height))
+hello_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((display_width // 2 - 50, display_height - 50 ), (100, 50)),
+                                             text='Action Menu',
+                                             manager=manager)
+clock = pygame.time.Clock()
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 
@@ -37,20 +44,27 @@ def game_menu():
     
 def game_loop():
     running = True
-    img = pygame.image.load('../map.jpg')
-    img.convert()
-    rect = img.get_rect()
-    rect.center = display_width//2, display_height//2
+    img = pygame.image.load('../map.jpg').convert()
+    img_rect = img.get_rect()
+    img_rect.center = display_width//2, display_height//2
     while running:
+        time_delta = clock.tick(60)/1000.0
         for event in pygame.event.get():
             if event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     running = False
             elif event.type == QUIT:
                 running = False
+            elif event.type == pygame.USEREVENT:
+                if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+                    if event.ui_element == hello_button:
+                        Menu(pygame.Rect((10, 10), (640, 480)), manager)
+            manager.process_events(event)
+        manager.update(time_delta)
         gameDisplay.fill((0,0,0))
-        gameDisplay.blit(img, rect)
-        pygame.draw.rect(gameDisplay, (45,0,0), rect, 1)
+        gameDisplay.blit(img, img_rect)
+        pygame.draw.rect(gameDisplay, (45,0,0), img_rect, 1)
+        manager.draw_ui(gameDisplay)
         pygame.display.update()
     # pygame.mixer.music.stop()
     # pygame.mixer.quit()
