@@ -27,17 +27,17 @@ class Menu(UIWindow):
         self.test_drop_down_menu = UIDropDownMenu(['Akkala',
                                                    'Central Hyrule',
                                                    'Dueling Peaks',
-                                                   'East Necula'
+                                                   'East Necluda',
                                                    'Eldin',
                                                    'Faron',
                                                    'Gerudo Highlands',
                                                    'Gerudo Wastelands',
-                                                   'Great Hyrule Forest'
+                                                   'Great Hyrule Forest',
                                                    'Great Plateau',
                                                    'Hebra',
                                                    'Lake',
                                                    'Lanaryu',
-                                                   'Ridgelands'
+                                                   'Ridgelands',
                                                    'Tabantha'
                                                    ],
                                                   current_resolution_string,
