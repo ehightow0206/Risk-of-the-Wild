@@ -3,9 +3,26 @@ import pygame_menu
 import pygame_gui
 from pygame.locals import *
 from menu import Menu
+from territory import Territory
  
 display_width = 800
 display_height = 600
+territory_names = ['Akkala',
+                    'Central Hyrule',
+                    'Dueling Peaks',
+                    'East Necluda',
+                    'Eldin',
+                    'Faron',
+                    'Gerudo Highlands',
+                    'Gerudo Wastelands',
+                    'Great Hyrule Forest',
+                    'Great Plateau',
+                    'Hebra',
+                    'Lake',
+                    'Lanaryu',
+                    'Ridgelands',
+                    'Tabantha'
+                    ]
 
 pygame.mixer.init()
 pygame.init()
@@ -44,6 +61,9 @@ def game_menu():
     
 def game_loop():
     running = True
+    territories = []
+    for territory in territory_names:
+        territories.append(Territory(territory))
     img = pygame.image.load('../map.jpg').convert()
     img_rect = img.get_rect()
     img_rect.center = display_width//2, display_height//2
